@@ -2,11 +2,12 @@
 <html xmlns:th=""http://www.thymeleaf.org>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <title>Bookstore</title>
 </head>
 <body>
-	<h1>Kirjat</h1>
-	<table>
+	<h1>Books</h1>
+	<table class="table table-striped">
 		<tbody>
 			<tr>
 				<th>ISBN</th>
@@ -21,11 +22,11 @@
 				<td th:text="${book.author}"></td>
 				<td th:text="${book.year}"></td>
 				<td th:text="${book.price}"></td>
-				<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>      
-				<td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>      
+				<td><a th:href="@{/editbook/{id}(id=${book.id})}" class="btn btn-success">Edit</a></td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="addbook" class="btn btn-primary">Add new Book</a>
+	<a href="addbook" class="btn btn-success">Add new Book</a>
 </body>
 </html>
