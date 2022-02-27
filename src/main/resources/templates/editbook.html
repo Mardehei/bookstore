@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Edit book</h1>
-	<form th:object="${book}" th:action="@{../save}" action="#" method="post">
+	<form th:object="${book}" th:action="@{/save}" action="#" method="post">
 		<label for="id"></label> <input type="hidden" id = "id" th:field="*{id}"/>
 		<label for="title">Title</label>
 		<input type="text" id="title" th:field="*{title}" />
@@ -24,7 +24,15 @@
 	  	<label for="Price">Price</label>
 		<input type="text" th:field="*{price}" />
 		<div style="clear: both; display: block; height: 10px;"></div>				
-		<input type="submit" value="Save" class="btn btn-success"></input>
+		
+		
+					<label for="list">Category</label>
+			<select id="list" th:field="*{category}" class="form-control">
+		    	<option th:each="category: ${categories}" th:value="${category.cateId}" th:text="${category.name}"></option>
+		  	</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		<input type="submit" value="Save edit" class="btn btn-success"></input>
 	</form>
 </body>
 </html>
