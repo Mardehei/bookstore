@@ -12,40 +12,46 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh22.bookstore.domain.Book;
 import hh22.bookstore.domain.BookRepository;
+import hh22.bookstore.domain.Category;
+import hh22.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 	
 	@Autowired 
-	private BookRepository repository;	
+	private BookRepository brepository;	
+	
+	@Autowired
+	private CategoryRepository crepository;
 	
 	@RequestMapping(value = "/bookstore", method = RequestMethod.GET) 
 	public String Books(Model model) {	
-		model.addAttribute("books", repository.findAll());
+		model.addAttribute("books", brepository.findAll());
 		return "bookstore";
 	}
 	
     @RequestMapping(value = "/addbook")
     public String addBook(Model model){
         model.addAttribute("book", new Book());
+        model.addAttribute("category" , crepository.findAll());
         return "addbook";
     } 
 	
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Book book){
-        repository.save(book);
+        brepository.save(book);
         return "redirect:bookstore";
     }   
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
-		repository.deleteById(bookId);
+		brepository.deleteById(bookId);
 		return "redirect:../bookstore";
 	}
 	
 	@GetMapping(value = "/editbook/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
-		model.addAttribute("book", repository.findById(bookId));
+		model.addAttribute("book", brepository.findById(bookId));
 		return "editbook";
 	}
 
